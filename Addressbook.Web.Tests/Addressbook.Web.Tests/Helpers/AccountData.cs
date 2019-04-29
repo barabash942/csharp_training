@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Addressbook.Web.Tests
 {
-    class AccountData
+    public class AccountData
     {
         private string username;
         private string password;
@@ -15,6 +15,11 @@ namespace Addressbook.Web.Tests
         {
             this.username = username;
             this.password = password;
+        }
+
+        public AccountData()
+        {
+
         }
 
         public string Username

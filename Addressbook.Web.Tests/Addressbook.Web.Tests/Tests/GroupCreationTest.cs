@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using System;
 using System.Text;
+using Addressbook.Web.Tests.Helpers;
 
 namespace Addressbook.Web.Tests
 {
@@ -43,7 +44,8 @@ namespace Addressbook.Web.Tests
             Login(new AccountData("admin", "secret"));
             GoToGroupsPage();
             InitGroupCreation();
-            GroupData group = new GroupData("Test1");
+            GroupData group = new GroupData();
+            group.Name = "Test1";
             group.Header = "Text";
             group.Footer = "another text";
             FillGroupForm(group);

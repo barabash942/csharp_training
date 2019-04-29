@@ -12,9 +12,9 @@ namespace Addressbook.Web.Tests
         private string header = "";
         private string footer = "";
 
-        public GroupData(string name)
+        public GroupData()
         {
-            this.name = name;
+           
         }
 
         public GroupData(string name, string header, string footer)

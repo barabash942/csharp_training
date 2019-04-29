@@ -60,10 +60,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\AccountData.cs" />
+    <Compile Include="Helpers\ContactData.cs" />
+    <Compile Include="Helpers\MainMenuActions.cs" />
     <Compile Include="OtherExamples\Circle.cs" />
     <Compile Include="OtherExamples\Figure.cs" />
     <Compile Include="Helpers\GroupData.cs" />
     <Compile Include="OtherExamples\Square.cs" />
+    <Compile Include="Tests\ContactCreationTest.cs" />
     <Compile Include="Tests\UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\GroupCreationTest.cs" />
