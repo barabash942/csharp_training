@@ -41,7 +41,7 @@ namespace Addressbook.Web.Tests
         }
 
         [Test]
-        public void TheUntitledTestCaseTest()
+        public void ContactCreationTestCase()
         {
             OpenHomePage();
             Login(new AccountData("admin", "secret"));
