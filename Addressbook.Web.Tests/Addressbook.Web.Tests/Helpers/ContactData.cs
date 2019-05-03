@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Addressbook.Web.Tests.Helpers
+namespace Addressbook.Web.Tests
 {
     public class ContactData
     {
