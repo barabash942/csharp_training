@@ -6,20 +6,25 @@ namespace Addressbook.Web.Tests
     public class GroupCreationTestCase : TestBase
     {
         [Test]
-        public void GroupCreationCaseTest()
+        public void GroupCreationTest()
         {
-            OpenHomePage();
-            Login(new AccountData("admin", "secret"));
-            GoToGroupsPage();
-            InitGroupCreation();
             GroupData group = new GroupData();
             group.Name = "Test1";
             group.Header = "Text";
             group.Footer = "another text";
-            FillGroupForm(group);
-            SubmitGroupCreation();
-            ReturnToGroupsPage();
-            Logout();
+
+            app.Groups.Create(group);
+        }
+
+        [Test]
+        public void EmptyGroupCreationTest()
+        {
+            GroupData group = new GroupData();
+            group.Name = "";
+            group.Header = "";
+            group.Footer = "";
+
+            app.Groups.Create(group);
         }
     }
 }
