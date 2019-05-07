@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+
 
 namespace Addressbook.Web.Tests.AppManager
 {
@@ -16,13 +16,69 @@ namespace Addressbook.Web.Tests.AppManager
         {
         }
 
+        public bool acceptNextAlert = true;
+
         public ContactHelper Create(ContactData contactData)
         {
-            manager.Navigator.GoToGroupsPage();
+            manager.Navigator.OpenHomePage();
 
             InitContactCreation();
             FillContactForm(contactData);
             SubmitContactCreation();
+            return this;
+        }
+
+        public ContactHelper Modify(int v, int e, ContactData newData)
+        {
+            manager.Navigator.OpenHomePage();
+
+            SelectContact(v);
+            InitContactModification(e);
+            FillContactForm(newData);
+            SubmitGroupModification();
+            return this;
+        }
+
+        public ContactHelper Remove(int p)
+        {
+            manager.Navigator.OpenHomePage();
+
+            SelectContact(p);
+            DeleteContact();
+            SubmitContactDeleting();
+            return this;
+        }
+
+        public ContactHelper SelectContact(int index)
+        {
+            driver.FindElement(By.XPath("(//input[@name= 'selected[]'])[" + index + "]")).Click();
+            acceptNextAlert = true;
+            return this;
+        }
+
+        public ContactHelper InitContactModification(int index)
+        {
+            driver.FindElement(By.XPath("(.//input[@name= 'selected[]'])[" + index + "][1]/following::img[2]")).Click();
+            return this;
+        }
+        //В InitContactModification добавлен index, чтобы редактировать именно тот контакт, который выделен. 
+        //Иначе неизвестно, какой контакт будет редактироваться, т.к. значок карандаша напротив каждого контакта.
+
+        public ContactHelper SubmitGroupModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+
+        public ContactHelper DeleteContact()
+        {
+            driver.FindElement(By.XPath("//input[@value= 'Delete']")).Click();
+            return this;
+        }
+
+        public ContactHelper SubmitContactDeleting()
+        {
+            driver.SwitchTo().Alert().Accept();
             return this;
         }
 
