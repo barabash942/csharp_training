@@ -68,7 +68,6 @@
     <Compile Include="AppManager\LoginHelper.cs" />
     <Compile Include="AppManager\NavigationHelper.cs" />
     <Compile Include="OtherExamples\Circle.cs" />
-    <Compile Include="OtherExamples\Class1.cs" />
     <Compile Include="OtherExamples\Figure.cs" />
     <Compile Include="Model\GroupData.cs" />
     <Compile Include="OtherExamples\Square.cs" />

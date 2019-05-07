@@ -16,8 +16,6 @@ namespace Addressbook.Web.Tests.AppManager
         {
         }
 
-        public bool acceptNextAlert = true;
-
         public ContactHelper Create(ContactData contactData)
         {
             manager.Navigator.OpenHomePage();
@@ -52,7 +50,6 @@ namespace Addressbook.Web.Tests.AppManager
         public ContactHelper SelectContact(int index)
         {
             driver.FindElement(By.XPath("(//input[@name= 'selected[]'])[" + index + "]")).Click();
-            acceptNextAlert = true;
             return this;
         }
 
