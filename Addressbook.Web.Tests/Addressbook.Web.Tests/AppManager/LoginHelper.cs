@@ -31,5 +31,25 @@ namespace Addressbook.Web.Tests
             Type(By.Name("pass"), account.Password);
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
         }
+
+        public bool IsLoggedIn()
+        {
+            return IsElementPresent(By.Name("logout"));
+        }
+
+        public bool IsLoggedIn(AccountData account)
+        {
+            return IsLoggedIn()
+                && driver.FindElement(By.Name("logout")).FindElement(By.TagName("b")).Text 
+                == "(" + account.Username + ")";
+        }
+
+        public void Logout()
+        {
+            if (IsLoggedIn())
+            {
+                driver.FindElement(By.LinkText("Logout")).Click();
+            }
+        }
     }
 }

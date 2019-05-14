@@ -30,6 +30,14 @@ namespace Addressbook.Web.Tests.AppManager
         {
             manager.Navigator.OpenHomePage();
 
+            if (!IsElementPresent(By.Name("selected[]")))
+            {
+                ContactData newcontact = new ContactData();
+                newcontact.FirstName = "Phill";
+                newcontact.LastName = "X";
+                Create(newcontact);
+            }
+
             SelectContact(v);
             InitContactModification(e);
             FillContactForm(newData);
@@ -40,6 +48,14 @@ namespace Addressbook.Web.Tests.AppManager
         public ContactHelper Remove(int p)
         {
             manager.Navigator.OpenHomePage();
+
+            if (!IsElementPresent(By.Name("selected[]")))
+            {
+                ContactData newcontact = new ContactData();
+                newcontact.FirstName = "Phill";
+                newcontact.LastName = "X";
+                Create(newcontact);
+            }
 
             SelectContact(p);
             DeleteContact();

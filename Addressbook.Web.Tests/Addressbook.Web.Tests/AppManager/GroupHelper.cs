@@ -31,6 +31,16 @@ namespace Addressbook.Web.Tests
         public GroupHelper Modify(int v, GroupData newData)
         {
             manager.Navigator.GoToGroupsPage();
+
+            if (!IsElementPresent(By.Name("selected[]")))
+            {
+                GroupData groupData = new GroupData();
+                groupData.Name = "Qwe";
+                groupData.Header = "rty";
+                groupData.Footer = "ewyt";
+                Create(groupData);
+            }
+
             SelectGroup(v);
             InitGroupModification();
             FillGroupForm(newData);
@@ -44,17 +54,26 @@ namespace Addressbook.Web.Tests
         {
             manager.Navigator.GoToGroupsPage();
 
+            if (!IsElementPresent(By.Name("selected[]")))
+            {
+                GroupData groupData = new GroupData();
+                groupData.Name = "Qwe";
+                groupData.Header = "rty";
+                groupData.Footer = "ewyt";
+                Create(groupData);
+            }
             SelectGroup(p);
             RemoveGroup();
             ReturnToGroupsPage();
+
             return this;
         }
 
     public GroupHelper InitGroupCreation()
-    {
+       {
         driver.FindElement(By.Name("new")).Click();
         return this;
-    }
+        }
 
     public GroupHelper FillGroupForm(GroupData groupdata)
         {
@@ -65,10 +84,10 @@ namespace Addressbook.Web.Tests
         }
 
         public GroupHelper SubmitGroupCreation()
-    {
+        {
         driver.FindElement(By.Name("submit")).Click();
         return this;
-    }
+        }
 
     public GroupHelper SelectGroup(int index)
     {

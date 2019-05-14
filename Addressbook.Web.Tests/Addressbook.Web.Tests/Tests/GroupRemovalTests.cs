@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace Addressbook.Web.Tests
 {
@@ -8,6 +9,7 @@ namespace Addressbook.Web.Tests
         [Test]
         public void GroupRemovalTest()
         {
+            
             app.Groups.Remove(1);
         }
     }
