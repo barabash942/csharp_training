@@ -57,22 +57,14 @@ namespace Addressbook.Web.Tests
     }
 
     public GroupHelper FillGroupForm(GroupData groupdata)
-    {
-        driver.FindElement(By.Name("group_name")).Click();
-        driver.FindElement(By.Name("group_name")).Clear();
-        driver.FindElement(By.Name("group_name")).SendKeys(groupdata.Name);
-        driver.FindElement(By.Name("group_header")).Click();
-        driver.FindElement(By.Name("group_header")).Click();
-        driver.FindElement(By.Name("group_header")).Clear();
-        driver.FindElement(By.Name("group_header")).SendKeys(groupdata.Header);
-        driver.FindElement(By.Name("group_footer")).Click();
-        driver.FindElement(By.Name("group_footer")).Clear();
-        driver.FindElement(By.Name("group_footer")).SendKeys(groupdata.Footer);
+        {
+            Type(By.Name("group_name"), groupdata.Name);
+            Type(By.Name("group_header"), groupdata.Header);
+            Type(By.Name("group_footer"), groupdata.Footer);
+            return this;
+        }
 
-        return this;
-    }
-
-    public GroupHelper SubmitGroupCreation()
+        public GroupHelper SubmitGroupCreation()
     {
         driver.FindElement(By.Name("submit")).Click();
         return this;

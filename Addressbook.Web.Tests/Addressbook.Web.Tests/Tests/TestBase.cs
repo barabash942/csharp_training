@@ -8,29 +8,17 @@ namespace Addressbook.Web.Tests
     public class TestBase
     {
         protected IWebDriver driver;
-        protected string baseURL;
         protected ApplicationManager app;
 
         [SetUp]
-        public void SetupTest()
+        public void SetupApplicationManager()
         {
-            app = new ApplicationManager();
-
-            app.Navigator.OpenHomePage();
-            app.Auth.Login(new AccountData("admin", "secret"));
-        }
-
-        [TearDown]
-        public void TeardownTest()
-        {
-            app.Stop();
+            app = ApplicationManager.GetInstance();
         }
 
         protected void Logout()
         {
             driver.FindElement(By.LinkText("Logout")).Click();
         }
-
-        
-   }
+    }
 }

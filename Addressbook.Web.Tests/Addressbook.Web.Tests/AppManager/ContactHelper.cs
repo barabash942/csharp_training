@@ -87,12 +87,8 @@ namespace Addressbook.Web.Tests.AppManager
 
         protected ContactHelper FillContactForm(ContactData contactData)
         {
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(contactData.FirstName);
-            driver.FindElement(By.Name("lastname")).Click();
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(contactData.LastName);
+            Type(By.Name("firstname"), contactData.FirstName);
+            Type(By.Name("lastname"), contactData.LastName);
             return this;
         }
 
