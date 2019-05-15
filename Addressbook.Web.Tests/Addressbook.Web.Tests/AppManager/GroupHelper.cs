@@ -16,11 +16,38 @@ namespace Addressbook.Web.Tests
     public GroupHelper(ApplicationManager manager) : base(manager)
     {
     }
+        public void GroupCreatedCheck()
+        {
+            if (!IsAnyGroupCreated())
+            {
+                GroupData groupData = new GroupData();
+                groupData.Name = "Qwe";
+                groupData.Header = "rty";
+                groupData.Footer = "ewyt";
+                Create(groupData);
+            }
+        }
+
+        public void GroupPageOpenCheck()
+        {
+            if (!IsGroupPageOpen())
+            {
+                manager.Navigator.GoToGroupsPage();
+            }
+        }
+
+        public bool IsAnyGroupCreated()
+        {
+            return IsElementPresent(By.Name("selected[]"));
+        }
+
+        public bool IsGroupPageOpen()
+        {
+            return driver.Url == manager.Navigator.baseURL + "group.php";
+        }
 
         public GroupHelper Create(GroupData groupdata)
         {
-            manager.Navigator.GoToGroupsPage();
-
             InitGroupCreation();
             FillGroupForm(groupdata);
             SubmitGroupCreation();
@@ -30,17 +57,6 @@ namespace Addressbook.Web.Tests
 
         public GroupHelper Modify(int v, GroupData newData)
         {
-            manager.Navigator.GoToGroupsPage();
-
-            if (!IsElementPresent(By.Name("selected[]")))
-            {
-                GroupData groupData = new GroupData();
-                groupData.Name = "Qwe";
-                groupData.Header = "rty";
-                groupData.Footer = "ewyt";
-                Create(groupData);
-            }
-
             SelectGroup(v);
             InitGroupModification();
             FillGroupForm(newData);
@@ -52,16 +68,6 @@ namespace Addressbook.Web.Tests
 
         public GroupHelper Remove(int p)
         {
-            manager.Navigator.GoToGroupsPage();
-
-            if (!IsElementPresent(By.Name("selected[]")))
-            {
-                GroupData groupData = new GroupData();
-                groupData.Name = "Qwe";
-                groupData.Header = "rty";
-                groupData.Footer = "ewyt";
-                Create(groupData);
-            }
             SelectGroup(p);
             RemoveGroup();
             ReturnToGroupsPage();

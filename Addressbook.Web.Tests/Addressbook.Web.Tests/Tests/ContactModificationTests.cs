@@ -10,6 +10,13 @@ namespace Addressbook.Web.Tests
     [TestFixture]
     public class ContactModificationTests : AuthTestBase
     {
+        [SetUp]
+        public void SetUp()
+        {
+            app.Contacts.OpenHomePageCheck();
+            app.Contacts.ContactCreatedCheck();
+        }
+
         [Test]
         public void ContactModificationTest()
         {

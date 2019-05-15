@@ -5,6 +5,12 @@ namespace Addressbook.Web.Tests
     [TestFixture]
     public class ContactCreationTest : AuthTestBase
     {
+        [SetUp]
+        public void SetUp()
+        {
+            app.Contacts.OpenHomePageCheck();
+        }
+
         [Test]
         public void ContactCreationTestCase()
         {

@@ -10,6 +10,13 @@ namespace Addressbook.Web.Tests
     [TestFixture]
     public class GroupModificationTests : AuthTestBase
     {
+        [SetUp]
+        public void SetUp()
+        {
+            app.Groups.GroupPageOpenCheck();
+            app.Groups.GroupCreatedCheck();
+        }
+
         [Test]
         public void GroupModificationTest()
         {

@@ -11,7 +11,7 @@ namespace Addressbook.Web.Tests
 {
     public class NavigationHelper : HelperBase
     {
-        private string baseURL;
+        public string baseURL;
 
         public NavigationHelper(ApplicationManager manager, string baseURL)
         : base(manager)

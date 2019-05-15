@@ -8,7 +8,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
 
-namespace Addressbook.Web.Tests.AppManager
+namespace Addressbook.Web.Tests
 {
     public class ContactHelper : HelperBase
     {
@@ -16,10 +16,37 @@ namespace Addressbook.Web.Tests.AppManager
         {
         }
 
+        public void OpenHomePageCheck()
+        {
+            if (!IsHomePageOpen())
+            {
+                manager.Navigator.OpenHomePage();
+            }
+        }
+
+        public void ContactCreatedCheck()
+        {
+            if (!IsAnyContactCreated())
+            {
+                ContactData newcontact = new ContactData();
+                newcontact.FirstName = "Phill";
+                newcontact.LastName = "X";
+                Create(newcontact);
+            }
+        }
+
+        public bool IsAnyContactCreated()
+        {
+            return IsElementPresent(By.Name("selected[]"));
+        }
+
+        public bool IsHomePageOpen()
+        {
+            return driver.Url == manager.Navigator.baseURL;
+        }
+
         public ContactHelper Create(ContactData contactData)
         {
-            manager.Navigator.OpenHomePage();
-
             InitContactCreation();
             FillContactForm(contactData);
             SubmitContactCreation();
@@ -28,16 +55,6 @@ namespace Addressbook.Web.Tests.AppManager
 
         public ContactHelper Modify(int v, int e, ContactData newData)
         {
-            manager.Navigator.OpenHomePage();
-
-            if (!IsElementPresent(By.Name("selected[]")))
-            {
-                ContactData newcontact = new ContactData();
-                newcontact.FirstName = "Phill";
-                newcontact.LastName = "X";
-                Create(newcontact);
-            }
-
             SelectContact(v);
             InitContactModification(e);
             FillContactForm(newData);
@@ -47,16 +64,6 @@ namespace Addressbook.Web.Tests.AppManager
 
         public ContactHelper Remove(int p)
         {
-            manager.Navigator.OpenHomePage();
-
-            if (!IsElementPresent(By.Name("selected[]")))
-            {
-                ContactData newcontact = new ContactData();
-                newcontact.FirstName = "Phill";
-                newcontact.LastName = "X";
-                Create(newcontact);
-            }
-
             SelectContact(p);
             DeleteContact();
             SubmitContactDeleting();

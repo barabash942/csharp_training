@@ -5,6 +5,12 @@ namespace Addressbook.Web.Tests
     [TestFixture]
     public class GroupCreationTestCase : AuthTestBase
     {
+        [SetUp]
+        public void SetUp()
+        {
+            app.Groups.GroupPageOpenCheck();
+        }
+
         [Test]
         public void GroupCreationTest()
         {
