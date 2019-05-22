@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace Addressbook.Web.Tests
 {
@@ -17,6 +18,8 @@ namespace Addressbook.Web.Tests
             ContactData contact = new ContactData();
             contact.FirstName = "Ann";
             contact.LastName = "Brown";
+
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
 
             app.Contacts.Create(contact);
         }

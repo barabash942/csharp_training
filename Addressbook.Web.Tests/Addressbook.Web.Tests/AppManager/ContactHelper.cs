@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -14,6 +15,21 @@ namespace Addressbook.Web.Tests
     {
         public ContactHelper(ApplicationManager manager) : base(manager)
         {
+        }
+
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigator.OpenHomePage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name = entry]"));
+
+            foreach (IWebElement element in elements)
+            {
+                var lastName = driver.FindElement(By.CssSelector("td"));
+                contacts.Add(new ContactData());
+            }
+
+            return contacts;
         }
 
         public void OpenHomePageCheck()

@@ -28,6 +28,25 @@ namespace Addressbook.Web.Tests
             }
         }
 
+        private List<GroupData> groupCache = null;
+
+        public List<GroupData> GetGroupList()
+        {
+            if (groupCache == null)
+            {
+                groupCache = new List<GroupData>();
+                manager.Navigator.GoToGroupsPage();
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+
+                foreach (IWebElement element in elements)
+                {
+                    groupCache.Add(new GroupData(element.Text));
+                }
+            }
+
+            return groupCache;//середина лекции 4.4
+        }
+
         public void GroupPageOpenCheck()
         {
             if (!IsGroupPageOpen())
@@ -97,7 +116,7 @@ namespace Addressbook.Web.Tests
 
     public GroupHelper SelectGroup(int index)
     {
-        driver.FindElement(By.XPath("(//input[@name= 'selected[]'])[" + index + "]")).Click();
+        driver.FindElement(By.XPath("(//input[@name= 'selected[]'])[" + (index+1) + "]")).Click();
         return this;
     }
 
