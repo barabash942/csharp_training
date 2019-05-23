@@ -28,20 +28,23 @@ namespace Addressbook.Web.Tests
             }
         }
 
-        //private List<GroupData> groupCache = null;
+        private List<GroupData> groupCache = null;
 
         public List<GroupData> GetGroupList()
         {
-            List<GroupData> groups = new List<GroupData>();
-            manager.Navigator.GoToGroupsPage();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
-
-            foreach (IWebElement element in elements)
+            if (groupCache == null)
             {
-                groups.Add(new GroupData(element.Text));
+                groupCache = new List<GroupData>();
+                manager.Navigator.GoToGroupsPage();
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+
+                foreach (IWebElement element in elements)
+                {
+                    groupCache.Add(new GroupData(element.Text));
+                }
             }
 
-            return groups;
+            return groupCache;//середина лекции 4.4
         }
 
         public void GroupPageOpenCheck()

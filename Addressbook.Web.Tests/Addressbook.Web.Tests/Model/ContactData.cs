@@ -11,7 +11,7 @@ namespace Addressbook.Web.Tests
         private string firstName;
         private string lastName;
 
-        public ContactData(string lastName, string firstName)
+        public ContactData(string firstName, string lastName)
         {
             this.firstName = firstName;
             this.lastName = lastName;
@@ -36,7 +36,7 @@ namespace Addressbook.Web.Tests
 
         private string DisplayName
         {
-            get { return $"{LastName} {FirstName}"; }
+            get { return $"{FirstName} {LastName}"; }
         }
 
         public int CompareTo(ContactData other)
@@ -45,9 +45,9 @@ namespace Addressbook.Web.Tests
             {
                 return 1;
             }
-            return LastName.CompareTo(other.LastName) != 0
-                   ? LastName.CompareTo(other.LastName)
-                   : FirstName.CompareTo(other.FirstName);
+            return FirstName.CompareTo(other.FirstName) != 0 ? 
+                    FirstName.CompareTo(other.FirstName) :
+                    LastName.CompareTo(other.LastName);
         }
 
         public bool Equals(ContactData other)
