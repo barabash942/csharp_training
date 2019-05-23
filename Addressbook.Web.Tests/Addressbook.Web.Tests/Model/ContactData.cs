@@ -11,7 +11,7 @@ namespace Addressbook.Web.Tests
         private string firstName;
         private string lastName;
 
-        public ContactData(string firstName, string lastName)
+        public ContactData(string lastName, string firstName)
         {
             this.firstName = firstName;
             this.lastName = lastName;
@@ -64,7 +64,7 @@ namespace Addressbook.Web.Tests
                 return true;
             }
 
-            return FirstName == other.FirstName && LastName == other.LastName;
+            return LastName == other.LastName && FirstName == other.FirstName;
         }
 
         public override int GetHashCode()

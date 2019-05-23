@@ -25,8 +25,8 @@ namespace Addressbook.Web.Tests
 
             foreach (IWebElement element in elements)
             {
-                var lastName = element.FindElement(By.XPath(".//td[1]"));
-                var firstName = element.FindElement(By.XPath(".//td[2]"));
+                var lastName = element.FindElement(By.XPath(".//td[2]"));
+                var firstName = element.FindElement(By.XPath(".//td[3]"));
                 contacts.Add(new ContactData(lastName.Text, firstName.Text));
             }
 

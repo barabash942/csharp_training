@@ -24,7 +24,17 @@ namespace Addressbook.Web.Tests
             newData.FirstName = "Kate";
             newData.LastName = "Green";
 
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+
             app.Contacts.Modify(1, 1, newData);
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            oldContacts[1].FirstName = newData.FirstName;
+            oldContacts[1].LastName = newData.LastName;
+            oldContacts.Sort();
+            newContacts.Sort();
+
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 }
