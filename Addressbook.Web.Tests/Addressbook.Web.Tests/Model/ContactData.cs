@@ -72,7 +72,7 @@ namespace Addressbook.Web.Tests
 
         public override string ToString()
         {
-            return DisplayName;
+            return LastName + FirstName;
         }
     }
 }

@@ -1,0 +1,9 @@
+diff a/Addressbook.Web.Tests/Addressbook.Web.Tests/AppManager/ContactHelper.cs b/Addressbook.Web.Tests/Addressbook.Web.Tests/AppManager/ContactHelper.cs	(rejected hunks)
+@@ -31,6 +31,7 @@
+                 contacts.Add(new ContactData(lastName.Text, firstName.Text));
+             }
+ 
++            System.Console.Out.Write(contacts);
+             return contacts;
+             
+         }
