@@ -45,9 +45,11 @@ namespace Addressbook.Web.Tests
             {
                 return 1;
             }
-            return FirstName.CompareTo(other.FirstName) != 0 ? 
-                    FirstName.CompareTo(other.FirstName) :
-                    LastName.CompareTo(other.LastName);
+
+            return
+                LastName.CompareTo(other.LastName) != 0
+                    ? LastName.CompareTo(other.LastName)
+                    : FirstName.CompareTo(other.FirstName);
         }
 
         public bool Equals(ContactData other)
