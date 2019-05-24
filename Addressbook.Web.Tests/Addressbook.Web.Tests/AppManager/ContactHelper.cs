@@ -32,18 +32,10 @@ namespace Addressbook.Web.Tests
                 {
                     var lastName = element.FindElement(By.XPath(".//td[2]"));
                     var firstName = element.FindElement(By.XPath(".//td[3]"));
-                    contactCache.Add(new ContactData(lastName.Text, firstName.Text)
-                    {
-                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
-                    });
+                    contactCache.Add(new ContactData(lastName.Text, firstName.Text));
                 }
             }
             return new List<ContactData>(contactCache);
-        }
-
-        public int GetContactsCount()
-        {
-            return driver.FindElements(By.CssSelector("tr[name = entry]")).Count;
         }
 
         public void OpenHomePageCheck()
