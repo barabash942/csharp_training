@@ -89,13 +89,13 @@ namespace Addressbook.Web.Tests
 
         public ContactHelper SelectContact(int index)
         {
-            driver.FindElement(By.XPath("(//input[@name= 'selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name= 'selected[]'])[" + (index+1) + "]")).Click();
             return this;
         }
 
         public ContactHelper InitContactModification(int index)
         {
-            driver.FindElement(By.XPath("(.//input[@name= 'selected[]'])[" + index + "][1]/following::img[2]")).Click();
+            driver.FindElement(By.XPath("(.//input[@name= 'selected[]'])[" + (index + 1) + "][1]/following::img[2]")).Click();
             return this;
         }
         //В InitContactModification добавлен index, чтобы редактировать именно тот контакт, который выделен. 
