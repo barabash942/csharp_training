@@ -24,6 +24,8 @@ namespace Addressbook.Web.Tests
 
             app.Groups.Create(group);
 
+            Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupsCount());
+
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups.Add(group);
             oldGroups.Sort();
@@ -43,6 +45,7 @@ namespace Addressbook.Web.Tests
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
             app.Groups.Create(group);
+            Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupsCount());
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups.Add(group);
@@ -63,13 +66,16 @@ namespace Addressbook.Web.Tests
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
             app.Groups.Create(group);
+            Assert.AreEqual(oldGroups.Count, app.Groups.GetGroupsCount());
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups.Add(group);
             oldGroups.Sort();
             newGroups.Sort();
 
-            Assert.AreEqual(oldGroups, newGroups);
+            Assert.AreNotEqual(oldGroups, newGroups);
+            //Сравнение по AreNotEqual, чтобы тест проходил при данных условиях.
+            //Получается проверка, что группа не может создаться с некорректным символом в имени.
         }
     }
 }

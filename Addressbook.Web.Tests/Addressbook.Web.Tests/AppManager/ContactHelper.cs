@@ -17,20 +17,33 @@ namespace Addressbook.Web.Tests
         {
         }
 
+        private List<ContactData> contactCache = null;
+
         public List<ContactData> GetContactList()
         {
-            List<ContactData> contacts = new List<ContactData>();
-            manager.Navigator.OpenHomePage();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name = entry]"));
-
-            foreach (IWebElement element in elements)
+            if (contactCache == null)
             {
-                var lastName = element.FindElement(By.XPath(".//td[2]"));
-                var firstName = element.FindElement(By.XPath(".//td[3]"));
-                contacts.Add(new ContactData(lastName.Text, firstName.Text));
-            }
+                contactCache = new List<ContactData>();
 
-            return contacts;
+                manager.Navigator.OpenHomePage();
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name = entry]"));
+
+                foreach (IWebElement element in elements)
+                {
+                    var lastName = element.FindElement(By.XPath(".//td[2]"));
+                    var firstName = element.FindElement(By.XPath(".//td[3]"));
+                    contactCache.Add(new ContactData(lastName.Text, firstName.Text)
+                    {
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    });
+                }
+            }
+            return new List<ContactData>(contactCache);
+        }
+
+        public int GetContactsCount()
+        {
+            return driver.FindElements(By.CssSelector("tr[name = entry]")).Count;
         }
 
         public void OpenHomePageCheck()
@@ -75,7 +88,7 @@ namespace Addressbook.Web.Tests
             SelectContact(v);
             InitContactModification(e);
             FillContactForm(newData);
-            SubmitGroupModification();
+            SubmitContactModification();
             return this;
         }
 
@@ -101,21 +114,24 @@ namespace Addressbook.Web.Tests
         //В InitContactModification добавлен index, чтобы редактировать именно тот контакт, который выделен. 
         //Иначе неизвестно, какой контакт будет редактироваться, т.к. значок карандаша напротив каждого контакта.
 
-        public ContactHelper SubmitGroupModification()
+        public ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            contactCache = null;
             return this;
         }
 
         public ContactHelper DeleteContact()
         {
             driver.FindElement(By.XPath("//input[@value= 'Delete']")).Click();
+            contactCache = null;
             return this;
         }
 
         public ContactHelper SubmitContactDeleting()
         {
             driver.SwitchTo().Alert().Accept();
+            contactCache = null;
             return this;
         }
 
@@ -135,6 +151,7 @@ namespace Addressbook.Web.Tests
         protected ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.XPath("//input[@value='Enter']")).Click();
+            contactCache = null;
             return this;
         }
     }
