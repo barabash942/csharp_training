@@ -36,6 +36,19 @@ namespace Addressbook.Web.Tests
             };
         }
 
+        public ContactData GetContactInfoFromDetails(int index)
+        {
+            manager.Navigator.OpenHomePage();
+            GoToContactDetails(0);
+
+            string allContactDetails = driver.FindElement(By.XPath("//div[@id='content']")).Text;
+
+            return new ContactData()
+            {
+                AllContactDetails = allContactDetails
+            };
+        }
+
         public ContactData GetContactInfoFromEditForm(int index)
         {
             manager.Navigator.OpenHomePage();
@@ -148,11 +161,17 @@ namespace Addressbook.Web.Tests
 
         public ContactHelper InitContactModification(int index)
         {
-            driver.FindElement(By.XPath("(.//input[@name= 'selected[]'])[" + (index + 1) + "][1]/following::img[2]")).Click();
+            driver.FindElements(By.Name("entry"))[index].FindElements(By.TagName("td"))[7]
+                .FindElement(By.TagName("a")).Click();
             return this;
         }
-        //В InitContactModification добавлен index, чтобы редактировать именно тот контакт, который выделен. 
-        //Иначе неизвестно, какой контакт будет редактироваться, т.к. значок карандаша напротив каждого контакта.
+
+        public ContactHelper GoToContactDetails(int index)
+        {
+            driver.FindElements(By.Name("entry"))[index].FindElements(By.TagName("td"))[6]
+                .FindElement(By.TagName("a")).Click();
+            return this;
+        }
 
         public ContactHelper SubmitContactModification()
         {
