@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
+using System;
 using System.Text;
 
 namespace Addressbook.Web.Tests
@@ -14,5 +15,20 @@ namespace Addressbook.Web.Tests
         {
             app = ApplicationManager.GetInstance();
         }
+
+        public static Random rnd = new Random();
+
+        public static string GenerateRandomString(int max)
+        {
+            int l = Convert.ToInt32(rnd.NextDouble() * max);
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < l; i++)
+            {
+                builder.Append(Convert.ToChar(32 + Convert.ToInt32(rnd.NextDouble() * 223))); //числа - это коды символов из таблицы ASCI
+            }
+
+            return builder.ToString();
+        }
+
     }
 }

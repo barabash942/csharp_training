@@ -216,7 +216,7 @@ namespace Addressbook.Web.Tests
 
         public override string ToString()
         {
-            return LastName + FirstName;
+            return "LastName= " + LastName + "\nFirstName = " + FirstName;
         }
     }
 }
