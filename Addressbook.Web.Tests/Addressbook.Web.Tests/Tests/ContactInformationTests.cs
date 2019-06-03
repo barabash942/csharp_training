@@ -29,9 +29,9 @@ namespace Addressbook.Web.Tests
         public void ContactInformationDetailsTest()
         {
             ContactData fromDetails = app.Contacts.GetContactInfoFromDetails(0);
-            ContactData fromForm = app.Contacts.GetContactInfoFromEditForm(0);
+            ContactData fromTable = app.Contacts.GetContactInfoFromTable(0);
 
-            Assert.AreEqual(fromForm.AllContactDetails, fromDetails.AllContactDetails);
+            Assert.AreEqual(fromTable.AllContactDetails, fromDetails.AllContactDetails);
         }
     }
 }

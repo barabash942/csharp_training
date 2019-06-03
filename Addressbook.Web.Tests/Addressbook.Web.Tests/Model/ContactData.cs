@@ -95,55 +95,88 @@ namespace Addressbook.Web.Tests
             {
                 return "";
             }
-            return FirstName + " ";
+            else
+            {
+                return FirstName;
+            }
 
             if (LastName == null || LastName == "")
             {
                 return "";
             }
-            return LastName + "\r\n";
+            else
+            {
+                return LastName;
+            }
 
             if (Address == null || Address == "")
             {
                 return "";
             }
-            return Address + "\r\n" + "\r\n";
+            else
+            {
+                return Address;
+            }
 
             if (HomePhone == null || HomePhone == "")
             {
                 return "";
             }
-            return "H: " + HomePhone + "\r\n";
+            else
+            {
+                return HomePhone;
+            }
 
             if (MobilePhone == null || MobilePhone == "")
             {
                 return "";
             }
-            return "M: " + MobilePhone + "\r\n";
+            else
+            {
+                return MobilePhone;
+            }
 
             if (WorkPhone == null || WorkPhone == "")
             {
                 return "";
             }
-            return "W: " + WorkPhone + "\r\n";
+            else
+            {
+                return WorkPhone;
+            }
 
             if (Email == null || Email == "")
             {
                 return "";
             }
-            return Email + "\r\n";
+            else
+            {
+                return Email;
+            }
 
             if (Email2 == null || Email2 == "")
             {
                 return "";
             }
-            return Email2 + "\r\n";
+            else
+            {
+                return Email2;
+            }
 
             if (Email3 == null || Email3 == "")
             {
                 return "";
             }
-            return Email3;
+            else
+            {
+                return Email3;
+            }
+
+            allContactDetails = FirstName + " " + LastName + "\r\n"
+                                + Address + "\r\n" + "\r\n" + "H: " + HomePhone + "\r\n"
+                                + "M: " + MobilePhone + "\r\n" + "W: " + WorkPhone + "\r\n"
+                                + Email + "\r\n" + Email2 + "\r\n" + Email3;
+            return allContactDetails;
         }
 
         private string CleanupPhones(string phone)
@@ -216,7 +249,12 @@ namespace Addressbook.Web.Tests
 
         public override string ToString()
         {
-            return "LastName= " + LastName + "\nFirstName = " + FirstName;
+            return "FirstName= " + FirstName + "LastName= " + LastName 
+                + "\nAddress = " + Address
+                + "\nHomePhone = " + HomePhone + "\nMobilePhone = " 
+                + MobilePhone + "\nWorkPhone = " + WorkPhone
+                + "\nEmail = " + Email + "\nEmail2 = " 
+                + Email2 + "\nEmail3 = " + Email3;
         }
     }
 }

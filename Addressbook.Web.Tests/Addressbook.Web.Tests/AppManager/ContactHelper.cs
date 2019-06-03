@@ -39,6 +39,7 @@ namespace Addressbook.Web.Tests
         public ContactData GetContactInfoFromDetails(int index)
         {
             manager.Navigator.OpenHomePage();
+            Thread.Sleep(250);
             GoToContactDetails(0);
 
             string allContactDetails = driver.FindElement(By.XPath("//div[@id='content']")).Text;
