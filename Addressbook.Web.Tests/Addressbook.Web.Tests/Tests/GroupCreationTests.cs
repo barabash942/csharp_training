@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using System.IO;
+using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Collections.Generic;
@@ -121,6 +122,20 @@ namespace Addressbook.Web.Tests
             Assert.AreNotEqual(oldGroups, newGroups);
             //Сравнение по AreNotEqual, чтобы тест проходил при данных условиях.
             //Получается проверка, что группа не может создаться с некорректным символом в имени.
+        }
+
+        [Test]
+        public void TestDBConnectivity()
+        {
+            DateTime start = DateTime.Now;
+            List<GroupData> fromui = app.Groups.GetGroupList();
+            DateTime end = DateTime.Now;
+            System.Console.WriteLine(end.Subtract(start));
+
+            start = DateTime.Now;
+            List<GroupData> fromdb = GroupData.GetAllFromDb();
+            end = DateTime.Now;
+            System.Console.WriteLine(end.Subtract(start));
         }
     }
 }

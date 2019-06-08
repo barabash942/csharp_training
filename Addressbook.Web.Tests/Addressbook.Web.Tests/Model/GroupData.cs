@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LinqToDB.Mapping;
 
 namespace Addressbook.Web.Tests
 {
+    [Table(Name = "group_list")]
     public class GroupData : IEquatable<GroupData>, IComparable<GroupData>
     {
         public GroupData()
@@ -25,12 +27,16 @@ namespace Addressbook.Web.Tests
             Footer = footer;
         }
 
+        [Column(Name = "group_name")]
         public string Name { get; set; }
 
+        [Column(Name = "group_header")]
         public string Header { get; set; }
 
+        [Column(Name = "group_footer")]
         public string Footer { get; set; }
 
+        [Column(Name = "group_id"), PrimaryKey, Identity]
         public string Id { get; set; }
 
         public int CompareTo(GroupData other)
@@ -65,6 +71,14 @@ namespace Addressbook.Web.Tests
         public override string ToString()
         {
             return "name= " + Name + "\nheader= " + Header + "\nfooter= " + Footer;
+        }
+
+        public static List<GroupData> GetAllFromDb()
+        {
+            using (AddressbookDB db = new AddressbookDB())
+            {
+                return (from g in db.Groups select g).ToList();
+            }
         }
     }
 }
