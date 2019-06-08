@@ -80,103 +80,16 @@ namespace Addressbook.Web.Tests
                 }
                 else
                 {
-                    return MakeContactDetailsToTest(allContactDetails).Trim();
+                    return (FirstName + " " + LastName + "\r\n"
+                            + Address + "\r\n\r\n" + "H: " + CleanupPhones(HomePhone)
+                            + "M: " + CleanupPhones(MobilePhone) + "W: " + CleanupPhones(WorkPhone) + "\r\n"
+                            + MakeEmailToConcat(Email) + MakeEmailToConcat(Email2) + MakeEmailToConcat(Email3)).Trim();
                 }
             }
             set
             {
                 allContactDetails = value;
             }
-        }
-
-        public string MakeContactDetailsToTest(string allContactDetails)
-        {
-            if (FirstName == null || FirstName == "")
-            {
-                return "";
-            }
-            else
-            {
-                return FirstName;
-            }
-
-            if (LastName == null || LastName == "")
-            {
-                return "";
-            }
-            else
-            {
-                return LastName;
-            }
-
-            if (Address == null || Address == "")
-            {
-                return "";
-            }
-            else
-            {
-                return Address;
-            }
-
-            if (HomePhone == null || HomePhone == "")
-            {
-                return "";
-            }
-            else
-            {
-                return HomePhone;
-            }
-
-            if (MobilePhone == null || MobilePhone == "")
-            {
-                return "";
-            }
-            else
-            {
-                return MobilePhone;
-            }
-
-            if (WorkPhone == null || WorkPhone == "")
-            {
-                return "";
-            }
-            else
-            {
-                return WorkPhone;
-            }
-
-            if (Email == null || Email == "")
-            {
-                return "";
-            }
-            else
-            {
-                return Email;
-            }
-
-            if (Email2 == null || Email2 == "")
-            {
-                return "";
-            }
-            else
-            {
-                return Email2;
-            }
-
-            if (Email3 == null || Email3 == "")
-            {
-                return "";
-            }
-            else
-            {
-                return Email3;
-            }
-
-            allContactDetails = FirstName + " " + LastName + "\r\n"
-                                + Address + "\r\n" + "\r\n" + "H: " + HomePhone + "\r\n"
-                                + "M: " + MobilePhone + "\r\n" + "W: " + WorkPhone + "\r\n"
-                                + Email + "\r\n" + Email2 + "\r\n" + Email3;
-            return allContactDetails;
         }
 
         private string CleanupPhones(string phone)
@@ -250,11 +163,11 @@ namespace Addressbook.Web.Tests
         public override string ToString()
         {
             return "FirstName= " + FirstName + "LastName= " + LastName 
-                + "\nAddress = " + Address
-                + "\nHomePhone = " + HomePhone + "\nMobilePhone = " 
-                + MobilePhone + "\nWorkPhone = " + WorkPhone
-                + "\nEmail = " + Email + "\nEmail2 = " 
-                + Email2 + "\nEmail3 = " + Email3;
+                + "\rAddress = " + Address
+                + "\rHomePhone = " + HomePhone + "\rMobilePhone = " 
+                + MobilePhone + "\rWorkPhone = " + WorkPhone
+                + "\rEmail = " + Email + "\rEmail2 = " 
+                + Email2 + "\rEmail3 = " + Email3;
         }
     }
 }
