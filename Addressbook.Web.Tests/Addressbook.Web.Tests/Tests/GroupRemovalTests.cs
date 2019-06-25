@@ -5,26 +5,19 @@ using OpenQA.Selenium;
 namespace Addressbook.Web.Tests
 {
     [TestFixture]
-    public class GroupRemovalTests: AuthTestBase
+    public class GroupRemovalTests: GroupTestBase
     {
-        [SetUp]
-        public void SetUp()
-        {
-            app.Groups.GroupPageOpenCheck();
-            app.Groups.GroupCreatedCheck();
-        }
-
         [Test]
         public void GroupRemovalTest()
         {
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAllFromDb();
             GroupData toBeRemoved = oldGroups[0];
 
-            app.Groups.Remove(0);
+            app.Groups.Remove(toBeRemoved);
 
             Assert.AreEqual(oldGroups.Count - 1, app.Groups.GetGroupsCount());
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAllFromDb();
             
             oldGroups.RemoveAt(0);
             Assert.AreEqual(oldGroups, newGroups);

@@ -28,6 +28,7 @@ namespace Addressbook.Web.Tests
             }
         }
 
+        
         private List<GroupData> groupCache = null;
 
         public List<GroupData> GetGroupList()
@@ -107,6 +108,14 @@ namespace Addressbook.Web.Tests
             return this;
         }
 
+        public void Modify(GroupData oldData, GroupData newData)
+        {
+            SelectGroup(oldData.Id);
+            InitGroupModification();
+            FillGroupForm(newData);
+            SubmitGroupModification();
+            ReturnToGroupsPage();
+        }
 
         public GroupHelper Remove(int p)
         {
@@ -115,6 +124,13 @@ namespace Addressbook.Web.Tests
             ReturnToGroupsPage();
 
             return this;
+        }
+
+        public void Remove(GroupData group)
+        {
+            SelectGroup(group.Id);
+            RemoveGroup();
+            ReturnToGroupsPage();
         }
 
     public GroupHelper InitGroupCreation()
@@ -144,7 +160,13 @@ namespace Addressbook.Web.Tests
         return this;
     }
 
-    public GroupHelper ReturnToGroupsPage()
+        public GroupHelper SelectGroup(string id)
+        {
+            driver.FindElement(By.XPath("(//input[@name= 'selected[]' and @value='"+id+"'])")).Click();
+            return this;
+        }
+
+        public GroupHelper ReturnToGroupsPage()
     {
         driver.FindElement(By.LinkText("groups")).Click();
         return this;

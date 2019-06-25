@@ -101,32 +101,21 @@
     <Compile Include="Tests\GroupRemovalTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\GroupCreationTests.cs" />
+    <Compile Include="Tests\GroupTestBase.cs" />
     <Compile Include="Tests\LoginTests.cs" />
     <Compile Include="Tests\SearchTests.cs" />
     <Compile Include="Tests\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="groups.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="groups.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="LinqToDB.Templates\DataAnnotations.ttinclude" />
-    <None Include="LinqToDB.Templates\DataModel.ttinclude" />
-    <None Include="LinqToDB.Templates\EditableObject.ttinclude" />
-    <None Include="LinqToDB.Templates\Humanizer.ttinclude" />
-    <None Include="LinqToDB.Templates\LinqToDB.MySql.Tools.ttinclude" />
-    <None Include="LinqToDB.Templates\LinqToDB.MySql.ttinclude" />
-    <None Include="LinqToDB.Templates\LinqToDB.Tools.ttinclude" />
-    <None Include="LinqToDB.Templates\LinqToDB.ttinclude" />
-    <None Include="LinqToDB.Templates\MultipleFiles.ttinclude" />
-    <None Include="LinqToDB.Templates\NotifyDataErrorInfo.ttinclude" />
-    <None Include="LinqToDB.Templates\NotifyPropertyChanged.ttinclude" />
-    <None Include="LinqToDB.Templates\ObsoleteAttributes.ttinclude" />
-    <None Include="LinqToDB.Templates\PluralizationService.ttinclude" />
-    <None Include="LinqToDB.Templates\T4Model.ttinclude" />
-    <None Include="LinqToDB.Templates\Validation.ttinclude" />
     <None Include="packages.config" />
     <None Include="groups.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -139,7 +128,6 @@
     <Content Include="groups.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="LinqToDB.Templates\CopyMe.MySql.tt.txt" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">

@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 namespace Addressbook.Web.Tests
 {
     [TestFixture]
-    public class GroupCreationTestCase : AuthTestBase
+    public class GroupCreationTestCase : GroupTestBase
     {
         [SetUp]
         public void SetUp()
@@ -87,13 +87,13 @@ namespace Addressbook.Web.Tests
         [Test, TestCaseSource("GroupDataFromJsonFile")]
         public void GroupCreationTest(GroupData group)
         {
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAllFromDb();
 
             app.Groups.Create(group);
 
             Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupsCount());
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAllFromDb();
             oldGroups.Add(group);
             oldGroups.Sort();
             newGroups.Sort();
@@ -130,12 +130,12 @@ namespace Addressbook.Web.Tests
             DateTime start = DateTime.Now;
             List<GroupData> fromui = app.Groups.GetGroupList();
             DateTime end = DateTime.Now;
-            System.Console.WriteLine(end.Subtract(start));
+            System.Console.Out.WriteLine(end.Subtract(start));
 
             start = DateTime.Now;
             List<GroupData> fromdb = GroupData.GetAllFromDb();
             end = DateTime.Now;
-            System.Console.WriteLine(end.Subtract(start));
+            System.Console.Out.WriteLine(end.Subtract(start));
         }
     }
 }

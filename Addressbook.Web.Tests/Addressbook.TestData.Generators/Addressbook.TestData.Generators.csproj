@@ -47,9 +47,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Addressbook.Web.Tests\Addressbook.Web.Tests.csproj">
       <Project>{05cdc311-78c5-4135-a89f-963727092e51}</Project>
       <Name>Addressbook.Web.Tests</Name>
