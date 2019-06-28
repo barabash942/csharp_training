@@ -22,5 +22,10 @@ namespace Addressbook.Web.Tests
         {
             get { return GetTable<ContactData>(); }
         }
+
+        public ITable<GroupContactRelation> GCR
+        {
+            get { return GetTable<GroupContactRelation>(); }
+        }
     }
 }

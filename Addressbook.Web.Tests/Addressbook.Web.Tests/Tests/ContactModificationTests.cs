@@ -8,15 +8,8 @@ using NUnit.Framework;
 namespace Addressbook.Web.Tests
 {
     [TestFixture]
-    public class ContactModificationTests : AuthTestBase
+    public class ContactModificationTests : ContactTestBase
     {
-        [SetUp]
-        public void SetUp()
-        {
-            app.Contacts.OpenHomePageCheck();
-            app.Contacts.ContactCreatedCheck();
-        }
-
         [Test]
         public void ContactModificationTest()
         {
@@ -24,11 +17,11 @@ namespace Addressbook.Web.Tests
             newData.FirstName = "Kate";
             newData.LastName = "Green";
 
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAllFromDb();
 
             app.Contacts.Modify(0, 0, newData);
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAllFromDb();
             oldContacts[0].FirstName = newData.FirstName;
             oldContacts[0].LastName = newData.LastName;
             oldContacts.Sort();

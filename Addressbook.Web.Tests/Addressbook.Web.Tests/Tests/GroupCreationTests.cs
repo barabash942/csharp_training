@@ -13,12 +13,6 @@ namespace Addressbook.Web.Tests
     [TestFixture]
     public class GroupCreationTestCase : GroupTestBase
     {
-        [SetUp]
-        public void SetUp()
-        {
-            app.Groups.GroupPageOpenCheck();
-        }
-
         public static IEnumerable<GroupData> RandomGroupDataProvider()
         {
             List<GroupData> groups = new List<GroupData>();
@@ -85,7 +79,7 @@ namespace Addressbook.Web.Tests
         }
 
         [Test, TestCaseSource("GroupDataFromJsonFile")]
-        public void GroupCreationTest(GroupData group)
+        public void GroupCreationWithDbDataTest(GroupData group)
         {
             List<GroupData> oldGroups = GroupData.GetAllFromDb();
 
@@ -127,15 +121,10 @@ namespace Addressbook.Web.Tests
         [Test]
         public void TestDBConnectivity()
         {
-            DateTime start = DateTime.Now;
-            List<GroupData> fromui = app.Groups.GetGroupList();
-            DateTime end = DateTime.Now;
-            System.Console.Out.WriteLine(end.Subtract(start));
-
-            start = DateTime.Now;
-            List<GroupData> fromdb = GroupData.GetAllFromDb();
-            end = DateTime.Now;
-            System.Console.Out.WriteLine(end.Subtract(start));
+            foreach (ContactData contact in GroupData.GetAllFromDb()[0].GetContacts())
+            {
+                System.Console.Out.WriteLine(contact);
+            }
         }
     }
 }

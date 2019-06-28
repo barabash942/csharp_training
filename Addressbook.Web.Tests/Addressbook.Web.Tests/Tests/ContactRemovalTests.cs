@@ -11,27 +11,28 @@ using OpenQA.Selenium.Support.UI;
 namespace Addressbook.Web.Tests
 {
     [TestFixture]
-    public class ContactRemovalTests : AuthTestBase
+    public class ContactRemovalTests : ContactTestBase
     {
-        [SetUp]
-        public void SetUp()
-        {
-            app.Contacts.OpenHomePageCheck();
-            app.Contacts.ContactCreatedCheck();
-        }
-
         [Test]
         public void ContactRemovalTest()
         {
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
-
+            List<ContactData> oldContacts = ContactData.GetAllFromDb();
+            
             app.Contacts.Remove(0);
 
+            List<ContactData> newContacts = ContactData.GetAllFromDb();
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            Assert.AreEqual(oldContacts.Count - 1, newContacts.Count);
+
+            ContactData toBeRemoved = oldContacts[0];
             oldContacts.RemoveAt(0);
 
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactData contact in newContacts)
+            {
+                Assert.AreNotEqual(contact.Id, toBeRemoved.Id);
+            }
         }
     }
 }

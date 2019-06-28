@@ -8,7 +8,7 @@ namespace Addressbook.Web.Tests
 {
     public class TestBase
     {
-        public static bool PERFORM_LOLG_UI_CHECKS = true;
+        public static bool PERFORM_LONG_UI_CHECKS = true;
         protected ApplicationManager app;
 
         [SetUp]

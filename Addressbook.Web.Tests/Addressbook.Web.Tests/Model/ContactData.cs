@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using LinqToDB.Mapping;
 
 namespace Addressbook.Web.Tests
 {
+    [Table(Name = "addressbook")]
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         private string allPhones;
@@ -24,10 +26,13 @@ namespace Addressbook.Web.Tests
 
         }
 
+        [Column("firstname")]
         public string FirstName { get; set; }
 
+        [Column("lastname")]
         public string LastName { get; set; }
 
+        [Column("id"), PrimaryKey]
         public string Id { get; set; }
 
         public string Address { get; set; }
@@ -127,6 +132,9 @@ namespace Addressbook.Web.Tests
             get { return $"{FirstName} {LastName}"; }
         }
 
+        [Column(Name = "deprecated")]
+        public string Deprecated { get; set; }
+
         public int CompareTo(ContactData other)
         {
             if (Object.ReferenceEquals(other, null))
@@ -139,6 +147,22 @@ namespace Addressbook.Web.Tests
                     ? LastName.CompareTo(other.LastName)
                     : FirstName.CompareTo(other.FirstName);
         }
+
+        public static List<ContactData> GetAllFromDb()
+        {
+            using (AddressbookDB db = new AddressbookDB())
+            {
+                return (from c in db.Contacts.Where(x => x.Deprecated == "0000-00-00 00:00:00") select c).ToList();
+            }
+        }
+
+        //public static List<ContactData> GetAllFromDBForRemoval()
+        //{
+        //    using (AddressbookDB db = new AddressbookDB())
+        //    {
+        //        return (from c in db.Contacts select c).ToList();
+        //    }
+        //}
 
         public bool Equals(ContactData other)
         {

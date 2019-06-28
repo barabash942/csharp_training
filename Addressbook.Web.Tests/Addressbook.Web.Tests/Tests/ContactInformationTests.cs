@@ -4,14 +4,8 @@ using System.Collections.Generic;
 namespace Addressbook.Web.Tests
 {
     [TestFixture]
-    public class ContactInformationTests : AuthTestBase
+    public class ContactInformationTests : ContactTestBase
     {
-        [SetUp]
-        public void SetUp()
-        {
-            app.Contacts.OpenHomePageCheck();
-        }
-
         [Test]
         public void ContactInformationTest()
         {

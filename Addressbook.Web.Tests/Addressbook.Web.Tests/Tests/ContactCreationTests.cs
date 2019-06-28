@@ -7,14 +7,8 @@ using System.Collections.Generic;
 namespace Addressbook.Web.Tests
 {
     [TestFixture]
-    public class ContactCreationTest : AuthTestBase
+    public class ContactCreationTest : ContactTestBase
     {
-        [SetUp]
-        public void SetUp()
-        {
-            app.Contacts.OpenHomePageCheck();
-        }
-
         public static IEnumerable<ContactData> RandomContactDataProvider()
         {
             List<ContactData> contacts = new List<ContactData>();
@@ -34,13 +28,13 @@ namespace Addressbook.Web.Tests
         }
 
         [Test, TestCaseSource("ContactDataFromXmlFile")]
-        public void ContactCreationTestCase(ContactData contact)
+        public void ContactCreationWithDbDataTest(ContactData contact)
         {
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAllFromDb();
 
             app.Contacts.Create(contact);
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAllFromDb();
             oldContacts.Add(contact);
             oldContacts.Sort();
             newContacts.Sort();
