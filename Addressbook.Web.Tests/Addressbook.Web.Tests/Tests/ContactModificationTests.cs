@@ -13,6 +13,14 @@ namespace Addressbook.Web.Tests
         [Test]
         public void ContactModificationTest()
         {
+            if (ContactData.GetAllFromDb().Count == 0)
+            {
+                string firstname = "UserNameForTest";
+                string lastname = "UserFamilyForTest";
+                ContactData contactForModication = new ContactData(lastname, firstname);
+                app.Contacts.Create(contactForModication);
+            }
+
             ContactData newData = new ContactData();
             newData.FirstName = "Kate";
             newData.LastName = "Green";

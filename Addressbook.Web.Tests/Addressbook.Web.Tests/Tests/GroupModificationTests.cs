@@ -13,6 +13,13 @@ namespace Addressbook.Web.Tests
         [Test]
         public void GroupModificationTest()
         {
+            if (GroupData.GetAllFromDb().Count == 0)
+            {
+                string name = "GroupNameForTest";
+                GroupData groupForModication = new GroupData(name);
+                app.Groups.Create(groupForModication);
+            }
+
             GroupData newData = new GroupData();
             newData.Name = "UpdatedText";
             newData.Header = null;

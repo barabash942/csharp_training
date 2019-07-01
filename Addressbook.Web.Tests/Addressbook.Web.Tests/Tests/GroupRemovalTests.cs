@@ -10,6 +10,13 @@ namespace Addressbook.Web.Tests
         [Test]
         public void GroupRemovalTest()
         {
+            if (GroupData.GetAllFromDb().Count == 0)
+            {
+                string name = "GroupNameForTest";
+                GroupData groupForRemoving = new GroupData(name);
+                app.Groups.Create(groupForRemoving);
+            }
+
             List<GroupData> oldGroups = GroupData.GetAllFromDb();
             GroupData toBeRemoved = oldGroups[0];
 

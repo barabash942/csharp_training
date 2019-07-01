@@ -16,6 +16,14 @@ namespace Addressbook.Web.Tests
         [Test]
         public void ContactRemovalTest()
         {
+            if (ContactData.GetAllFromDb().Count == 0)
+            {
+                string firstname = "UserNameForTest";
+                string lastname = "UserFamilyForTest";
+                ContactData contactForRemoving = new ContactData(lastname, firstname);
+                app.Contacts.Create(contactForRemoving);
+            }
+
             List<ContactData> oldContacts = ContactData.GetAllFromDb();
             
             app.Contacts.Remove(0);

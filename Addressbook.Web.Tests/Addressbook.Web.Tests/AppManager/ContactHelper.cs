@@ -183,6 +183,8 @@ namespace Addressbook.Web.Tests
             SelectContact(p);
             DeleteContact();
             SubmitContactDeleting();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(5))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
             return this;
         }
 
