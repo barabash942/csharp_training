@@ -26,6 +26,11 @@ namespace Addressbook.Web.Tests
 
         }
 
+        public ContactData(string allContactDetails)
+        {
+            AllContactDetails = allContactDetails;
+        }
+
         [Column("firstname")]
         public string FirstName { get; set; }
 
@@ -79,16 +84,59 @@ namespace Addressbook.Web.Tests
         {
             get
             {
-                if (allContactDetails != null)
+                if (allContactDetails != null || allContactDetails != "")
                 {
                     return allContactDetails;
                 }
                 else
                 {
-                    return (FirstName + " " + LastName + "\r\n"
-                            + Address + "\r\n\r\n" + "H: " + CleanupPhones(HomePhone)
-                            + "M: " + CleanupPhones(MobilePhone) + "W: " + CleanupPhones(WorkPhone) + "\r\n"
-                            + MakeEmailToConcat(Email) + MakeEmailToConcat(Email2) + MakeEmailToConcat(Email3)).Trim();
+                    allContactDetails = "";
+                    if (FirstName == null || FirstName == "")
+                    {
+                        allContactDetails += FirstName + " ";
+                    }
+
+                    if (LastName == null || LastName == "")
+                    {
+                        allContactDetails += LastName + "\r\n";
+                    }
+
+                    if (Address == null || Address == "")
+                    {
+                        allContactDetails += Address + "\r\n\r\n";
+                    }
+
+                    if (HomePhone == null || HomePhone == "")
+                    {
+                        allContactDetails += "H: " + HomePhone + "\r\n";
+                    }
+
+                    if (MobilePhone == null || MobilePhone == "")
+                    {
+                        allContactDetails += "M: " + MobilePhone + "\r\n";
+                    }
+
+                    if (WorkPhone == null || WorkPhone == "")
+                    {
+                        allContactDetails += "W: " + WorkPhone + "\r\n";
+                    }
+
+                    if (Email == null || Email == "")
+                    {
+                        allContactDetails += Email + "\r\n";
+                    }
+
+                    if (Email2 == null || Email2 == "")
+                    {
+                        allContactDetails += Email2 + "\r\n";
+                    }
+
+                    if (Email3 == null || Email3 == "")
+                    {
+                        allContactDetails += Email3;
+                    }
+
+                    return allContactDetails.Trim();
                 }
             }
             set
