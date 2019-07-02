@@ -41,7 +41,7 @@ namespace Addressbook.Web.Tests
             manager.Navigator.OpenHomePage();
 
             ClearGroupFilter();
-            SelectContactForAdding(contact.Id);
+            SelectContactById(contact.Id);
             SelectGroupToAdd(group.Name);
             CommitAddedContactToGroup();
             new WebDriverWait(driver, TimeSpan.FromSeconds(5))
@@ -53,7 +53,7 @@ namespace Addressbook.Web.Tests
             new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
         }
 
-        private void SelectContactForAdding(string contactId)
+        private void SelectContactById(string contactId)
         {
             driver.FindElement(By.Id(contactId)).Click();
         }
@@ -66,6 +66,28 @@ namespace Addressbook.Web.Tests
         private void CommitAddedContactToGroup()
         {
             driver.FindElement(By.Name("add")).Click();
+        }
+
+        public void RemoveContactFromGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.OpenHomePage();
+
+            SelectGroupForContactRemoving(group.Name);
+            SelectContactById(contact.Id);
+            SelectGroupForContactRemoving(group.Name);
+            DeleteContactFromGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(5))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        private void SelectGroupForContactRemoving(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText(name);
+        }
+
+        private void DeleteContactFromGroup()
+        {
+            driver.FindElement(By.Name("remove")).Click();
         }
 
         public ContactData GetContactInfoFromDetails(int index)
