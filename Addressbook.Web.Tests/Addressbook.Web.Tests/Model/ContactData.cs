@@ -204,13 +204,17 @@ namespace Addressbook.Web.Tests
             }
         }
 
-        //public static List<ContactData> GetAllFromDBForRemoval()
-        //{
-        //    using (AddressbookDB db = new AddressbookDB())
-        //    {
-        //        return (from c in db.Contacts select c).ToList();
-        //    }
-        //}
+        public List<GroupData> GetGroups()
+        {
+            using (AddressbookDB db = new AddressbookDB())
+            {
+                List<GroupData> groups =
+                    (from g in db.Groups
+                     from gcr in db.GCR.Where(p => p.ContactId == Id && p.GroupId == g.Id)
+                     select g).Distinct().ToList();
+                return groups;
+            }
+        }
 
         public bool Equals(ContactData other)
         {

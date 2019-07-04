@@ -19,6 +19,7 @@ namespace Addressbook.Web.Tests
             GroupData group = GroupData.GetAllFromDb()[0];
             List<ContactData> oldList = group.GetContacts();
             ContactData contact = ContactData.GetAllFromDb().First();
+            app.Contacts.ContactAddedInGroupCheck(contact, oldList, group);
 
             //Act
             app.Contacts.RemoveContactFromGroup(contact, group);

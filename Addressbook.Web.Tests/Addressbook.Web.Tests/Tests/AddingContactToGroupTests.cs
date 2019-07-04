@@ -17,8 +17,11 @@ namespace Addressbook.Web.Tests
             app.Contacts.ContactCreatedCheck();
 
             GroupData group = GroupData.GetAllFromDb()[0];
+            ContactData contact = ContactData.GetAllFromDb()[0];
             List<ContactData> oldList = group.GetContacts();
-            ContactData contact = ContactData.GetAllFromDb().Except(oldList).First();
+            List<GroupData> allGroups = contact.GetGroups();
+            app.Contacts.AbleToAddContactInGroupCheck(allGroups);
+            contact = ContactData.GetAllFromDb().Except(group.GetContacts()).First();
 
             //Act
             app.Contacts.AddContactToGroup(contact, group);

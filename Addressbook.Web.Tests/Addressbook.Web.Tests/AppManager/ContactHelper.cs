@@ -90,6 +90,25 @@ namespace Addressbook.Web.Tests
             driver.FindElement(By.Name("remove")).Click();
         }
 
+        public void AbleToAddContactInGroupCheck(List<GroupData> groupContactList)
+        {
+            List<GroupData> allGroups = GroupData.GetAllFromDb();
+
+            if (allGroups.Count.Equals(groupContactList.Count))
+            {
+                ContactData contact = new ContactData("lastName1", "firstName1");
+                Create(contact);
+            }
+        }
+
+        public void ContactAddedInGroupCheck(ContactData contact, List<ContactData> groupList, GroupData group)
+        {
+            if (groupList.Count == 0)
+            {
+                AddContactToGroup(contact, group);
+            }
+        }
+
         public ContactData GetContactInfoFromDetails(int index)
         {
             manager.Navigator.OpenHomePage();
